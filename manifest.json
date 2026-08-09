@@ -2,6 +2,7 @@
   "id": "mega_evolution",
   "name": "Mega Evolution",
   "author": "eduardocalafell",
+  "github": "eduardocalafell/gen1recomp-mega-evolution",
   "version": "0.2.0",
   "api": 2,
   "entry": "main.lua",
