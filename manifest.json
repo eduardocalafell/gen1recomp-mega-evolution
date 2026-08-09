@@ -1,0 +1,17 @@
+{
+  "id": "mega_evolution",
+  "name": "Mega Evolution",
+  "author": "eduardocalafell",
+  "version": "0.2.0",
+  "api": 2,
+  "entry": "main.lua",
+  "profile": "content",
+  "category": "Content",
+  "game_version": ">=0.1.37 <2.0.0",
+  "priority": 110,
+  "dependencies": ["gen2_dex"],
+  "optional_dependencies": [],
+  "conflicts": [],
+  "permissions": ["engine_internals"],
+  "description": "In-battle Mega Evolution for Kanto/Johto Pokemon, done the honest way: a TEMPORARY battle transform (not a permanent evolution) that reverts when the battle ends, reusing the engine's own Transform machinery. Covers all 21 Gen 1/2 mega forms (Venusaur, Charizard X & Y, Blastoise, Gyarados, Gengar, Tyranitar, Scizor, ...). Press SELECT (Tab) in the battle action menu to Mega Evolve your active Pokemon, with a proper transformation animation. Gated by a minimum level and an optional battle cooldown; once per battle. Charizard and Mewtwo pick X or Y in the options. Depends on gen2_dex (pins the Pokedex bound; provides the Dark/Steel types)."
+}
