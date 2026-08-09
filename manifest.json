@@ -3,7 +3,7 @@
   "name": "Mega Evolution",
   "author": "eduardocalafell",
   "github": "eduardocalafell/gen1recomp-mega-evolution",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "api": 2,
   "entry": "main.lua",
   "profile": "content",
@@ -14,5 +14,5 @@
   "optional_dependencies": [],
   "conflicts": [],
   "permissions": ["engine_internals"],
-  "description": "In-battle Mega Evolution for Kanto/Johto Pokemon, done the honest way: a TEMPORARY battle transform (not a permanent evolution) that reverts when the battle ends, reusing the engine's own Transform machinery. Covers all 21 Gen 1/2 mega forms (Venusaur, Charizard X & Y, Blastoise, Gyarados, Gengar, Tyranitar, Scizor, ...). Press SELECT (Tab) in the battle action menu to Mega Evolve your active Pokemon, with a proper transformation animation. Gated by a minimum level and an optional battle cooldown; once per battle. Charizard and Mewtwo pick X or Y in the options. Depends on gen2_dex (pins the Pokedex bound; provides the Dark/Steel types)."
+  "description": "In-battle Mega Evolution for Kanto/Johto Pokemon, done the honest way: a TEMPORARY battle transform (not a permanent evolution) that reverts when the battle ends, reusing the engine's own Transform machinery. Covers all 21 Gen 1/2 mega forms. Unlocked through quests: MEGARE, a researcher in Prof. Oak's Lab, sets a trial per Pokemon; clear it and he gives you that Pokemon's Mega Stone (a key item). Hold the stone and press SELECT (Tab) in battle to Mega Evolve, with a full transformation animation. Once per battle. Charizard and Mewtwo pick X or Y in the options. Depends on gen2_dex (pins the Pokedex bound; provides the Dark/Steel types). See QUESTS.md for every trial."
 }

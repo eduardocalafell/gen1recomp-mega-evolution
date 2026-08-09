@@ -9,12 +9,22 @@ ends, exactly like the real games. It works by reusing the engine's own
 `sprite` are swapped for the mega form's, while the party Pokémon itself is never
 touched, so the change is free to undo.
 
-## How to use
+## How to unlock and use
 
-In battle, on the action menu (FIGHT / PKMN / ITEM / RUN), press **SELECT**
-(**Tab**, or either Shift) while your active Pokémon can Mega Evolve. A `TAB:MEGA`
-prompt shows when it's available. The transformation plays a short animation, and
-your Pokémon fights the rest of the battle in its mega form.
+Mega Evolution is earned, not free. **Megare**, a Mega-Evolution researcher, stands
+in **Professor Oak's Lab** in Pallet Town and sets a **trial for each Pokémon**
+(see **[QUESTS.md](QUESTS.md)** for all 21). Every trial tracks automatically in
+the background — raise the Pokémon to a level, rack up KOs with its line, etc.
+
+When a trial is complete, **talk to Megare** and he hands you that Pokémon's
+**Mega Stone** (a key item). While you hold the stone, in battle press **SELECT**
+(**Tab**, or either Shift) on the action menu — a `TAB:MEGA` prompt shows when your
+active Pokémon can transform. The transformation plays a full animation, and your
+Pokémon fights the rest of the battle in its mega form (reverting afterward). Once
+per battle.
+
+Charizard and Mewtwo have **X** and **Y** stones — earn either or both, and pick
+the form in the mod's options.
 
 ## What's covered
 
@@ -28,15 +38,13 @@ All **21 Gen 1/2 mega forms**, with their real base stats and typings:
 Charizard and Mewtwo have two forms each — pick **X** or **Y** in the mod's
 options.
 
-## Gates (all in the mod's options)
+## Gating
 
-- **MEGA MIN LVL** — minimum level to Mega Evolve (OFF / 30 / 40 / 50).
-- **MEGA COOLDOWN** — battles that must pass between Mega Evolutions
-  (OFF / every 3 / 5 / 10).
-- Only **once per battle**, always.
-- **CHARIZARD MEGA / MEWTWO MEGA** — choose the X or Y form.
-
-The prompt tells you why a mega is unavailable (`NEED LV40`, `CD 2`, `USED`).
+- You can only Mega Evolve a Pokémon whose **Mega Stone** you hold — earned from
+  **Megare's trials** (see [QUESTS.md](QUESTS.md)).
+- Only **once per battle**.
+- **CHARIZARD MEGA / MEWTWO MEGA** (mod options) — choose the X or Y form when you
+  own both stones.
 
 ## Requires
 
