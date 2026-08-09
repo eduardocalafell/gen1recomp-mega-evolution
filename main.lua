@@ -309,44 +309,59 @@ return function(mod)
     step()
   end
 
+  local function suffixOf(m)
+    local s = m.id:match("_(%u)$")
+    return s and (" " .. s) or ""
+  end
+
+  -- Browsable quest log: every mega form, marked * (stone earned) or - (trial
+  -- still open). Choosing one shows its progress (or a "done" note). B closes.
+  local function openQuestLog(game, onDone)
+    local items = {}
+    for _, m in ipairs(MEGAS) do
+      local have = game.save.inventory and game.save.inventory[m.stone]
+      items[#items + 1] = { label = (have and "*" or "-") .. " " .. m.name .. suffixOf(m),
+                            mega = m }
+    end
+    local ListMenu = require("src.ui.ListMenu")
+    local menu = ListMenu.new(game, "MEGA TRIALS", items, {
+      wrap = true, keyRepeat = true,
+      onCancel = function() if onDone then onDone() end end,
+      onChoose = function(item)
+        local m = item.mega
+        local msgs = {}
+        if game.save.inventory and game.save.inventory[m.stone] then
+          msgs[#msgs + 1] = m.name .. suffixOf(m) .. ": CLEARED!"
+          msgs[#msgs + 1] = "Hold " .. m.stoneName .. "\nto Mega Evolve."
+        else
+          for _, l in ipairs(progressMsgs(game, m)) do msgs[#msgs + 1] = l end
+        end
+        sayChain(game, msgs) -- returns to the list underneath
+      end,
+    })
+    game.stack:push(menu)
+  end
+
+  -- Talk: greet (first time) + hand over every newly-cleared stone, then open
+  -- the browsable quest log.
   local function megareTalk(game, ow, npc, onDone)
     local save = game.save
-    local msgs = {}
+    local pre = {}
     if not mod.save:get("metMegare") then
       mod.save:set("metMegare", true)
-      msgs[#msgs + 1] = "I'm MEGARE! I study\nMega Evolution."
-      msgs[#msgs + 1] = "Clear my trials and I'll\ngive you the Mega Stone"
-      msgs[#msgs + 1] = "that awakens each\nPOKeMON's true power!"
+      pre[#pre + 1] = "I'm MEGARE! I study\nMega Evolution."
+      pre[#pre + 1] = "Clear my trials and I'll\ngive you the Mega Stone"
+      pre[#pre + 1] = "that awakens each\nPOKeMON's true power!"
     end
-    local awarded = false
     for _, m in ipairs(MEGAS) do
       if not mod.save:get("claim_" .. m.stone) and questDone(game, m) then
         require("src.inventory.Bag").add(save, m.stone, 1, game.data)
         mod.save:set("claim_" .. m.stone, true)
-        awarded = true
-        msgs[#msgs + 1] = m.name .. "'s trial cleared!"
-        msgs[#msgs + 1] = "Take the " .. m.stoneName .. "!"
+        pre[#pre + 1] = m.name .. suffixOf(m) .. " trial cleared!"
+        pre[#pre + 1] = "Take the " .. m.stoneName .. "!"
       end
     end
-    if not awarded then
-      local pending
-      for _, m in ipairs(MEGAS) do
-        if not mod.save:get("claim_" .. m.stone) and ownsSpecies(save, m.from) then
-          pending = m; break
-        end
-      end
-      if pending then
-        for _, l in ipairs(progressMsgs(game, pending)) do msgs[#msgs + 1] = l end
-      elseif #msgs == 0 then
-        local allDone = true
-        for _, m in ipairs(MEGAS) do
-          if not mod.save:get("claim_" .. m.stone) then allDone = false; break end
-        end
-        msgs[#msgs + 1] = allDone and "You hold every Mega\nStone. Masterful!"
-                          or "Train a POKeMON that\ncan Mega Evolve!"
-      end
-    end
-    sayChain(game, msgs, onDone)
+    sayChain(game, pre, function() openQuestLog(game, onDone) end)
   end
 
   mod.content.maps:patch("OAKS_LAB", { objects = { __append = { {
